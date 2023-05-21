@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=3 uid="uid://cqgg32e7viltb"]
+
+[ext_resource type="Script" path="res://scenes/player/Player.cs" id="1_a5pqf"]
+[ext_resource type="Texture2D" uid="uid://0yv3rcgmtuat" path="res://scenes/player/crosshair001.png" id="2_h0kdj"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1khl6"]
+
+[node name="Player" type="CharacterBody3D"]
+floor_max_angle = 1.0472
+floor_snap_length = 0.2
+script = ExtResource("1_a5pqf")
+MovementSpeed = 8.0
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_1khl6")
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+
+[node name="HUD" type="Control" parent="Head"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Head/HUD"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Head/HUD/CenterContainer"]
+layout_mode = 2
+texture = ExtResource("2_h0kdj")
+
+[node name="Camera" type="Camera3D" parent="Head"]
+current = true
+near = 0.01
+
+[node name="Hand" type="Node3D" parent="Head"]

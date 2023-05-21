@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://w4ijyr0fjx4c"]
+
+[ext_resource type="Script" path="res://scenes/main/Main.cs" id="1_2g7d2"]
+[ext_resource type="PackedScene" uid="uid://dkb8ceft2qkij" path="res://scenes/sample_scene/sample_scene.tscn" id="2_ug6mj"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_2g7d2")
+
+[node name="SampleScene" parent="." instance=ExtResource("2_ug6mj")]

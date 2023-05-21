@@ -1,0 +1,127 @@
+[gd_scene load_steps=10 format=3 uid="uid://dkb8ceft2qkij"]
+
+[ext_resource type="Texture2D" uid="uid://4ypkamrhrfir" path="res://textures/Grass_1m x 1m.png" id="1_p3cdv"]
+[ext_resource type="Texture2D" uid="uid://cfiu2gyyar7q8" path="res://textures/Wall_1m x 1m.png" id="2_3nak4"]
+[ext_resource type="PackedScene" uid="uid://cqgg32e7viltb" path="res://scenes/player/player.tscn" id="3_fyq7k"]
+[ext_resource type="PackedScene" uid="uid://dl1qb2eq0e48r" path="res://scenes/target/target.tscn" id="4_6o0qe"]
+[ext_resource type="Environment" uid="uid://dxcd8df2ocka" path="res://environment.tres" id="4_w2su7"]
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_x58tl"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b3e1y"]
+albedo_texture = ExtResource("1_p3cdv")
+metallic_specular = 0.0
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_53i0t"]
+albedo_texture = ExtResource("2_3nak4")
+metallic_specular = 0.0
+uv1_scale = Vector3(1, -1, -1)
+uv1_triplanar = true
+
+[sub_resource type="PrismMesh" id="PrismMesh_nl7gm"]
+material = SubResource("StandardMaterial3D_53i0t")
+left_to_right = 0.0
+size = Vector3(4, 4, 2)
+
+[node name="SampleScene" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, 0.353553, -0.353553, 0, 0.707107, 0.707107, 0.5, -0.612372, 0.612372, 0, 0, 0)
+light_color = Color(0.807843, 0.807843, 0.807843, 1)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("4_w2su7")
+camera_attributes = SubResource("CameraAttributesPractical_x58tl")
+
+[node name="Terrain" type="Node3D" parent="."]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Terrain"]
+use_collision = true
+size = Vector3(100, 1, 100)
+material = SubResource("StandardMaterial3D_b3e1y")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(-0.707106, 0, -0.707106, 0, 1, 0, 0.707106, 0, -0.707106, 4.55363, 1, -3.15105)
+use_collision = true
+material = SubResource("StandardMaterial3D_53i0t")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 2, 0)
+use_collision = true
+material = SubResource("StandardMaterial3D_53i0t")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 1, 0)
+use_collision = true
+material = SubResource("StandardMaterial3D_53i0t")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(-0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, -0.866025, -2.27122, 1, 0.343585)
+use_collision = true
+material = SubResource("StandardMaterial3D_53i0t")
+
+[node name="Arch" type="CSGCombiner3D" parent="Terrain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 11)
+use_collision = true
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Terrain/Arch"]
+size = Vector3(4, 4, 4)
+material = SubResource("StandardMaterial3D_53i0t")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="Terrain/Arch"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.03431, 0)
+operation = 2
+size = Vector3(2, 2, 4)
+material = SubResource("StandardMaterial3D_53i0t")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Terrain/Arch"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+operation = 2
+radius = 1.0
+height = 5.0
+sides = 32
+material = SubResource("StandardMaterial3D_53i0t")
+
+[node name="Arch2" type="CSGCombiner3D" parent="Terrain"]
+transform = Transform3D(0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, 0.5, 15, 2.5, 4)
+use_collision = true
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Terrain/Arch2"]
+size = Vector3(4, 4, 4)
+material = SubResource("StandardMaterial3D_53i0t")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="Terrain/Arch2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.03431, 0)
+operation = 2
+size = Vector3(2, 2, 4)
+material = SubResource("StandardMaterial3D_53i0t")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Terrain/Arch2"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+operation = 2
+radius = 1.0
+height = 5.0
+sides = 32
+material = SubResource("StandardMaterial3D_53i0t")
+
+[node name="Target" parent="Terrain" instance=ExtResource("4_6o0qe")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2, 3.29166, 10)
+
+[node name="Target2" parent="Terrain" instance=ExtResource("4_6o0qe")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2, 1.78584, 12)
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Terrain"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3, 2.5, 9)
+use_collision = true
+mesh = SubResource("PrismMesh_nl7gm")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 2.5, 12)
+use_collision = true
+size = Vector3(2, 4, 2)
+material = SubResource("StandardMaterial3D_53i0t")
+
+[node name="Player" parent="." instance=ExtResource("3_fyq7k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 3)
